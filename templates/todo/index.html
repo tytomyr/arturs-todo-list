@@ -31,7 +31,9 @@
         <h6 style="color: brown; display: inline">Dead-line: {{ task.optional_deadline }}</h6>
       {% endif %}
       <br>
-      <h6  style="display: inline;color: gray">Tags: {{ task.tags }} </h6>
+
+      <h6  style="display: inline;color: gray">Tags:{% for tag in task.tags.all %} {{ tag }} {% endfor %} </h6>
+
       <a href="{% url 'todo:task-update' pk=task.pk%}">Update</a>
       <a href="{% url 'todo:task-delete' pk=task.pk%}">Delete</a>
     </td>
