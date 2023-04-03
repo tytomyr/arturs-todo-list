@@ -1,4 +1,8 @@
 .idea
 venv
 **__pycache__
+<<<<<<< HEAD
 .pyc
+=======
+db.sqlite3
+>>>>>>> 5db2e5bf3d6bb1ae89ad61e0051dc3e9fa9c0ece
