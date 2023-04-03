@@ -3,13 +3,23 @@
   <div style="margin-top: 30px; justify-content: space-around;">
   <a style="display: inline; float: right" type="button" class="btn btn-success" href="{% url "todo:tag-create" %}">Add</a>
   <h1 style="display: inline">Tag list</h1>
-  <h6>click to delete</h6>
-  <ul>
+  <table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
   {% for tag in tag_list %}
-    <li style="list-style-type: none;">
-      <a href="{% url 'todo:tag-delete' pk=tag.pk%}">{{ tag.name }}</a>
-    </li>
+    <tr>
+    <td>{{ tag.name }}</td>
+    <td>
+      <a class="btn btn-secondary" href="{% url 'todo:tag-update' pk=tag.pk%}">Update</a>
+    </td>
+    <td>
+      <a class="btn btn-secondary" href="{% url 'todo:tag-delete' pk=tag.pk%}">Delete</a>
+    </td>
+    </tr>
   {% endfor %}
-  </ul>
   </div>
 {% endblock %}

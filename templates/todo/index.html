@@ -1,5 +1,43 @@
 {% extends "base.html" %}
-
 {% block content %}
-  <h1>TODO list</h1>
+  <div style="margin-top: 30px; justify-content: space-around;">
+  <a style="display: inline; float: right; margin-right: 10px" type="button" class="btn btn-primary" href="{% url "todo:task-create" %}">Add task</a>
+  <h1 style="display: inline">TODO list</h1>
+
+  <table class="table">
+  <thead>
+  {% for task in task_list %}
+    <tr>
+    <td>
+      {% if task.the_boolean is False %}
+        <a style="float: right" type="button" class="btn btn-success" href="{% url 'todo:task-status' pk=task.id%}">Complete</a>
+      {% else %}
+        <a style="float: right" type="button" class="btn btn-secondary" href="{% url 'todo:task-status' pk=task.id%}">Undo</a>
+      {% endif %}
+      <h4 style="display: inline">
+        {{ task.content  }}
+      </h4>
+        {% if task.the_boolean %}
+          <h6 style="display: inline; color: green">Done</h6>
+          {% else %}
+          <h6 style="display: inline; color: red">To be done</h6>
+        {% endif %}
+      <br>
+      <h6 style="display: inline">
+        Created: {{ task.datetime }}
+      </h6>
+      {% if task.optional_deadline %}
+        <br>
+        <h6 style="color: brown; display: inline">Dead-line: {{ task.optional_deadline }}</h6>
+      {% endif %}
+      <br>
+      <h6  style="display: inline;color: gray">Tags: {{ task.tags }} </h6>
+      <a href="{% url 'todo:task-update' pk=task.pk%}">Update</a>
+      <a href="{% url 'todo:task-delete' pk=task.pk%}">Delete</a>
+    </td>
+    </tr>
+  {% endfor %}
+  </thead>
+  </table>
+  </div>
 {% endblock %}
